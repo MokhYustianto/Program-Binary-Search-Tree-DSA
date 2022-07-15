@@ -1,0 +1,61 @@
+//Program Binary Search Tree Input Data Bilangan Deretan Angka Secara In Order//Mokh.Yustianto.R//
+
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node{
+	int key;
+	struct node *left, *right;
+};
+
+/*Sebuah fungsi untuk membuat Simpul Baru dari Binary Search Tree*/
+struct node *NodeBaru(int item){
+	struct node *temp = (struct node*)malloc(sizeof( struct node));
+	temp-> key = item;
+	temp-> left = temp-> right = NULL;
+	
+	return temp;
+}
+
+/*sebuah fungsi untuk in-order traversal dari Binary Search tree*/
+void inorder(struct node *root){
+	if(root != NULL){
+		inorder(root->left);
+		printf("%d ", root->key);
+		inorder(root->right);
+	}
+}
+
+/*Sebuah fungsi untuk memasukkan simpul baru dengan nilai atau key tertentu ke dalam Binary Search tree*/
+struct node *insert(struct node *node, int key){
+	if(node == NULL)return NodeBaru(key);
+	
+	if(key < node->key)node->left = insert(node->left, key);
+	
+	else if(key > node->key)node->right = insert(node->right, key);
+	
+	return node;
+}
+
+int main(){
+	struct node *root = NULL;
+	root = insert(root, 13);
+	insert(root, 27);
+	insert(root, 83);
+  insert(root, 67);
+  insert(root, 1);	
+	insert(root, 90);
+	insert(root, 37);
+	insert(root, 40);
+	insert(root, 62);
+	insert(root, 102);
+	insert(root, 53);
+	insert(root, 72);
+	insert(root, 34);
+	insert(root, 21);
+	insert(root, 20);
+	
+	inorder(root); /*Mencetak in-order traversal dari Binary Search tree*/
+	
+	return 0;
+}
