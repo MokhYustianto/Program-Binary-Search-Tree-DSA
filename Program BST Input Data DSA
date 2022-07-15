@@ -1,4 +1,4 @@
-//Program Binary Search Tree Input Data Bilangan Deretan Angka Secara In Order//Mokh.Yustianto.R//
+//Program Binary Search Tree Input Data Bilangan Deretan Angka dengan in-order In Order//Mokh.Yustianto.R//
 
 #include<stdio.h>
 #include<stdlib.h>
