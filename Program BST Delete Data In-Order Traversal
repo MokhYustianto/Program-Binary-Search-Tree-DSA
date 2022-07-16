@@ -87,8 +87,8 @@ int main(){
 	root = insert(root, 13);
 	insert(root, 27);
 	insert(root, 83);
-    insert(root, 67);
-    insert(root, 1);	
+        insert(root, 67);
+        insert(root, 1);	
 	insert(root, 90);
 	insert(root, 37);
 	insert(root, 40);
