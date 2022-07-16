@@ -1,0 +1,112 @@
+//Program Binary Search Tree Delete Data//Mokh.Yustianto.R//
+
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node{
+	int key;
+	struct node *left, *right;
+};
+
+/*Sebuah fungsi untuk membuat Simpul Baru dari Binary Search Tree*/
+struct node *NodeBaru(int item){
+	struct node *temp = (struct node*)malloc(sizeof( struct node));
+	temp-> key = item;
+	temp-> left = temp-> right = NULL;
+	
+	return temp;
+}
+
+/*sebuah fungsi untuk in-order traversal dari Binary Search tree*/
+void inorder(struct node *root){
+	if(root != NULL){
+		inorder(root->left);
+		printf("%d ", root->key);
+		inorder(root->right);
+	}
+}
+
+/*Sebuah fungsi untuk memasukkan simpul baru dengan nilai atau key tertentu ke dalam Binary Search tree*/
+struct node *insert(struct node *node, int key){
+	if(node == NULL)return NodeBaru(key);
+	
+	if(key < node->key)node->left = insert(node->left, key);
+	
+	else if(key > node->key)node->right = insert(node->right, key);
+	
+	return node;
+}
+
+struct node* minValueNode(struct node* node)
+{
+    struct node* current = node;
+    
+    while (current && current->left != NULL)
+        current = current->left;
+ 
+    return current;
+}
+
+/*Fungsi untuk Delete Data pada Binary Search Tree*/
+struct node* HapusNode(struct node* root, int key)
+{
+    if (root == NULL)
+        return root;
+ 
+    if (key < root->key)
+        root->left = HapusNode(root->left, key);
+ 
+
+    else if (key > root->key)
+         root->right = HapusNode(root->right, key);
+ 
+    else {
+        if (root->left == NULL) {
+            struct node* temp = root->right;
+            free(root);
+            return temp;
+        }
+        else if (root->right == NULL) {
+            struct node* temp = root->left;
+            free(root);
+            return temp;
+        }
+ 
+        struct node* temp = minValueNode(root->right);
+ 
+        root->key = temp->key;
+ 
+        root->right = HapusNode(root->right, temp->key);
+    }
+    return root;
+}
+ 
+
+int main(){
+	struct node *root = NULL;
+	root = insert(root, 13);
+	insert(root, 27);
+	insert(root, 83);
+    insert(root, 67);
+    insert(root, 1);	
+	insert(root, 90);
+	insert(root, 37);
+	insert(root, 40);
+	insert(root, 62);
+	insert(root, 102);
+	insert(root, 53);
+	insert(root, 72);
+	insert(root, 34);
+	insert(root, 21);
+	insert(root, 20);
+	
+	printf("Deretan Angka Sebelum Dihapus bilangan 102:\n");
+	inorder(root); /*Mencetak in-order traversal dari Binary Search tree*/
+	
+	root = HapusNode(root, 102);//Menghapus bilangan 102//
+	printf("\n");
+	printf("\nDeretan Angka Setelah Dihapus bilangan 102:\n");/*mencetak hasil deretan angka setelah dihapus bilangan 102*/
+	inorder(root);
+	
+	return 0;
+}
